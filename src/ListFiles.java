@@ -4,22 +4,29 @@ import java.util.Scanner;
 public class ListFiles {
 
     public static void listFiles(String path,int hypens){
+        String hyphenString = getSeparatorString(hypens,'-');
         File directoryPath = new File(path);
         File[] files = directoryPath.listFiles();
-        if(files.length==0)return;
+        if(files==null || files.length==0)return;
 
         for(File i : files){
-            if(i.isDirectory() && !i.isHidden()){
-                for(int j=0;j<hypens-6;j++) System.out.print("-");
+            System.out.print(hyphenString);
+            if(i.isDirectory() && !i.isHidden() ){
                 System.out.println(i.getName());
                 listFiles(i.getAbsolutePath(),hypens+6);
             }else {
-                for(int j=0;j<hypens-6;j++) System.out.print("-");
                 System.out.println(i.getName());
             }
         }
         hypens = hypens - 6;
-        return ;
+    }
+
+    public static String getSeparatorString(int n , char c){
+        StringBuilder s = new StringBuilder("");
+        for(int i = 0;i<n;i++){
+            s.append(c);
+        }
+        return s.toString();
     }
 
     public static void main(String[] args) {
