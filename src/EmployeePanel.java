@@ -16,9 +16,10 @@ public class EmployeePanel {
                 case 0 : System.exit(0);
                 case 1 : {
                     System.out.println("Enter the empId, name and salary");
-                    int empId = sc.nextInt();
-                    String name = sc.next();
-                    double salary = sc.nextDouble();
+                    int empId = Integer.parseInt(sc.nextLine());
+//                    sc.nextLine();
+                    String name = sc.nextLine();
+                    double salary = Double.parseDouble(sc.nextLine());
                     empService.addEmployee(empId,name,salary);
                     break;
                 }
@@ -35,7 +36,8 @@ public class EmployeePanel {
                 }
                 case 4: {
                     System.out.println("Enter employee name to retrieve details of employee");
-                    String name = sc.next();
+                    sc.nextLine();
+                    String name = sc.nextLine();
                     empService.searchEmployee(name);
                     break;
                 }

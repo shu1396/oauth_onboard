@@ -24,6 +24,7 @@ public class EmployeeService implements EmployeeDataService{
         Employee emp = empMapping.get(empId);
         if(emp!=null){
             empMapping.remove(empId);
+            System.out.println("Employee removed");
         }
         else{
             System.out.println("EmpId doesn't exist");
@@ -31,27 +32,40 @@ public class EmployeeService implements EmployeeDataService{
     }
     public void showEmployee(){
         Set<Integer> empRecord = empMapping.keySet();
-        for(int i:empRecord){
-            Employee empDetails = empMapping.get(i);
-            System.out.println(empDetails.getEmpid()+" "+empDetails.getName()+" "+empDetails.getSalary());
+        if(empRecord.size()==0){
+            System.out.println("No employee in the record");
+        }
+        else {
+            for (int i : empRecord) {
+                Employee empDetails = empMapping.get(i);
+                System.out.println(empDetails.getEmpid() + " " + empDetails.getName() + " " + empDetails.getSalary());
+            }
         }
     }
     public void searchEmployee(String name){
         Set<Integer> empRecord = empMapping.keySet();
-        for(int i:empRecord){
-            Employee empDetails = empMapping.get(i);
-            if(empDetails.getName().equals(name)){
-                System.out.println(empDetails.getEmpid()+" "+empDetails.getName()+" "+empDetails.getSalary());
+        if(empRecord.size()==0){
+            System.out.println("No employee in the record");
+        }
+        else{
+            for(int i:empRecord){
+                Employee empDetails = empMapping.get(i);
+                if(empDetails.getName().equals(name)){
+                    System.out.println(empDetails.getEmpid()+" "+empDetails.getName()+" "+empDetails.getSalary());
+                }
             }
         }
     }
     public void searchEmployeeBySalary(double a, double b){
+        int flag = 0;
         Set<Integer> empRecord = empMapping.keySet();
         for(int i:empRecord){
             Employee empDetails = empMapping.get(i);
             if(empDetails.getSalary()>=a && empDetails.getSalary()<=b){
                 System.out.println(empDetails.getEmpid()+" "+empDetails.getName()+" "+empDetails.getSalary());
+                flag=1;
             }
         }
+        if(flag==0) System.out.println("No Employee in salary range between a and b");
     }
 }
