@@ -5,4 +5,5 @@ public interface EmployeeDataService {
     void showEmployee();
     void searchEmployee(String name);
     void searchEmployeeBySalary(double a, double b);
+    void searchEmployeeSalaryByMonth(int empId, int month,int page);
 }

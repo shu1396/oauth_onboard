@@ -1,5 +1,5 @@
 import java.util.*;
-
+import java.util.Date;
 public class EmployeeService implements EmployeeDataService{
     private static EmployeeService es;
     private EmployeeService(){}
@@ -67,5 +67,39 @@ public class EmployeeService implements EmployeeDataService{
             }
         }
         if(flag==0) System.out.println("No Employee in salary range between a and b");
+    }
+    public void searchEmployeeSalaryByMonth(int empId, int month,int page) {
+        Date d = new Date();
+        Employee emp = empMapping.get(empId);
+        int year = 2018;
+        int serialNumber = 1;
+        if (emp!= null) {
+            int stop = 4;
+            System.out.println(String.format("%128s", "").replace(' ', '-'));
+            System.out.printf("|%-20s|%-20s|%-20s|%-20s|%-20s|%-21s|\n","S.No","Emp ID","Date","Working Days","Salary","Per Day Salary");
+            while(stop--!=0){
+                if(month<0){
+                    year = year-1;
+                    month = 12+month;
+                }
+                if(month>11){
+                    year = year+1;
+                    month = month - 12;
+                }
+                Calendar mycal = new GregorianCalendar(2018, month, 1);
+                int daysInMonth = mycal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                System.out.printf("|%-20d|",serialNumber++);
+                System.out.printf("%-20d|", emp.getEmpid());
+                System.out.printf("1/%d/%-16d",month,year);
+                System.out.printf("|%-20d",daysInMonth);
+                System.out.printf("|%-20d",(int)emp.getSalary());
+                System.out.printf("|%-21d|\n",(int)emp.getSalary()/daysInMonth);
+                month--;
+            }
+            System.out.println(String.format("%128s", "").replace(' ', '-'));
+        }
+        else {
+            System.out.println("EmpId doesn't exist");
+        }
     }
 }
