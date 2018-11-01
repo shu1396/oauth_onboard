@@ -1,4 +1,6 @@
-public interface EmployeeDataService {
+package com.paytm.service;
+
+public interface EmployeeService {
 
     void addEmployee(int empId,String name,double salary);
     void removeEmployee(int empId);

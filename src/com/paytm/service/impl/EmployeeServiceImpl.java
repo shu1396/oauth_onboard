@@ -1,11 +1,16 @@
+package com.paytm.service.impl;
+
+import com.paytm.pojo.Employee;
+import com.paytm.service.EmployeeService;
+
 import java.util.*;
 import java.util.Date;
-public class EmployeeService implements EmployeeDataService{
-    private static EmployeeService es;
-    private EmployeeService(){}
-    public static EmployeeService getInstance(){
+public class EmployeeServiceImpl implements EmployeeService {
+    private static EmployeeServiceImpl es;
+    private EmployeeServiceImpl(){}
+    public static EmployeeServiceImpl getInstance(){
         if(es==null){
-            es = new EmployeeService();
+            es = new EmployeeServiceImpl();
             return es;
         }
         else return es;
@@ -24,7 +29,7 @@ public class EmployeeService implements EmployeeDataService{
         Employee emp = empMapping.get(empId);
         if(emp!=null){
             empMapping.remove(empId);
-            System.out.println("Employee removed");
+            System.out.println("com.paytm.pojo.Employee removed");
         }
         else{
             System.out.println("EmpId doesn't exist");
@@ -43,11 +48,17 @@ public class EmployeeService implements EmployeeDataService{
         }
     }
     public void searchEmployee(String name){
+
         Set<Integer> empRecord = empMapping.keySet();
         if(empRecord.size()==0){
             System.out.println("No employee in the record");
         }
         else{
+/*            empMapping.forEach(empDetails->{
+                if(empMapping.get(empDetails).equals(name)){
+                    System.out.println(empDetails.getEmpid()+" "+empDetails.getName()+" "+empDetails.getSalary());
+                }
+            });*/
             for(int i:empRecord){
                 Employee empDetails = empMapping.get(i);
                 if(empDetails.getName().equals(name)){
@@ -66,7 +77,7 @@ public class EmployeeService implements EmployeeDataService{
                 flag=1;
             }
         }
-        if(flag==0) System.out.println("No Employee in salary range between a and b");
+        if(flag==0) System.out.println("No com.paytm.pojo.Employee in salary range between a and b");
     }
     public void searchEmployeeSalaryByMonth(int empId, int month,int page) {
         Date d = new Date();
